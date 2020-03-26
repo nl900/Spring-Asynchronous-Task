@@ -29,5 +29,11 @@ public class TaskService {
 
     }
 
+    public void delete(Long taskId) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new IllegalArgumentException(Long.toString(taskId)));
+        taskRepository.delete(task);
+    }
+
 
 }

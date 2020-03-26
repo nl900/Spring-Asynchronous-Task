@@ -6,8 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.util.Date;
+import java.util.Optional;
 import javax.persistence.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.http.ResponseEntity;
 
 @Entity
 public class Task {
@@ -34,7 +36,5 @@ public class Task {
     public void setName(String name) {
         this.name = name;
     }
-
-
 
 }
