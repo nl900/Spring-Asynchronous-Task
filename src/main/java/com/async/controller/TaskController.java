@@ -11,7 +11,9 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.Future;
 
 @RestController
 @RequestMapping("/tasks")
@@ -19,6 +21,8 @@ public class TaskController {
 
     @Autowired
     TaskService taskService;
+
+    private Future<Integer> checkTask;
 
     @GetMapping("/")
     public List<Task> listTasks() {
@@ -42,5 +46,15 @@ public class TaskController {
     public ResponseEntity<?> deleteTask(@PathVariable Long taskId) {
         taskService.delete(taskId);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{taskId}/execute")
+    @ResponseBody
+    public ResponseEntity<String> executeTask(@PathVariable Long taskId, @RequestBody Map<String, Integer> data) {
+        int x = data.get("x");
+        int y = data.get("y");
+        checkTask = taskService.executeTask(taskId, x, y);
+
+        return new ResponseEntity<String>("Task started", HttpStatus.OK);
     }
 }
