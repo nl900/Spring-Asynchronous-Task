@@ -44,7 +44,6 @@ public class TaskService {
     @Async
     public Future<Integer> executeTask(Long taskId, int x, int y) {
         log.info("Timer start");
-//        System.out.println("Timer start");
 
         for (int sec = x; sec < y; sec++) {
             if (Thread.currentThread().isInterrupted()) {
@@ -53,7 +52,6 @@ public class TaskService {
             }
             try {
                 log.info(sec + " second");
-//                System.out.println(sec + " second");
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -61,7 +59,6 @@ public class TaskService {
             }
         }
         log.info("Timer end");
-//        System.out.println("Timer end");
         return new AsyncResult<>(y);
 
     }

@@ -57,4 +57,11 @@ public class TaskController {
 
         return new ResponseEntity<String>("Task started", HttpStatus.OK);
     }
+
+    @GetMapping("/{taskId}/stop")
+    @ResponseBody
+    public ResponseEntity<String> stopTask() {
+        checkTask.cancel(true);
+        return new ResponseEntity<String>("Task stopped", HttpStatus.OK);
+    }
 }
